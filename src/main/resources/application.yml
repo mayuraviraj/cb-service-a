@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: cb-service-a
+  jackson.serialization.indent_output: true
+
+management:
+  endpoints.web.exposure.include:
+    - '*'
+#  endpoint.health.show-details: always
+#  health.circuitbreakers.enabled: true
+
+  endpoint.health.show-details: "ALWAYS"
+  health.circuitbreakers.enabled: true
+
+logging.level.io.github.resilience4j.circuitbreaker: DEBUG
+
+
+resilience4j.circuitbreaker:
+  instances:
+    countriesCircuitBreaker:
+      registerHealthIndicator: true
+      slidingWindowSize: 3                  # The sliding window size to 3 calls
+      minimumNumberOfCalls: 3               # Minimum 3 calls required to evaluate failure rate
+      permittedNumberOfCallsInHalfOpenState: 1
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 5s           # Time to wait before transitioning to half-open state
+      failureRateThreshold: 100             # Failure rate threshold set to 100%
+      eventConsumerBufferSize: 10
