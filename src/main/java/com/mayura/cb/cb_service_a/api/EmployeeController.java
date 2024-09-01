@@ -22,7 +22,7 @@ public class EmployeeController {
     private final ServiceB serviceB;
 
     @GetMapping("/data/{id}")
-    @CircuitBreaker(name = "countriesCircuitBreaker", fallbackMethod = "getMyDataFallback")
+    @CircuitBreaker(name = "circuitBreaker", fallbackMethod = "getMyDataFallback")
     public List<Object> getData(@PathVariable("id") String id) throws Exception {
         return serviceB.getData(id);
     }

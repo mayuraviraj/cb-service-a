@@ -6,9 +6,6 @@ spring:
 management:
   endpoints.web.exposure.include:
     - '*'
-#  endpoint.health.show-details: always
-#  health.circuitbreakers.enabled: true
-
   endpoint.health.show-details: "ALWAYS"
   health.circuitbreakers.enabled: true
 
@@ -17,7 +14,7 @@ logging.level.io.github.resilience4j.circuitbreaker: DEBUG
 
 resilience4j.circuitbreaker:
   instances:
-    countriesCircuitBreaker:
+    circuitBreaker:
       registerHealthIndicator: true
       slidingWindowSize: 3                  # The sliding window size to 3 calls
       minimumNumberOfCalls: 3               # Minimum 3 calls required to evaluate failure rate
